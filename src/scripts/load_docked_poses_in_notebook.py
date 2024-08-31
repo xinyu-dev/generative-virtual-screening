@@ -1,6 +1,7 @@
 import py3Dmol
 import os
 import json
+import numpy as np
 
 def ansi_color(text, color):
     """Color text for console output"""
@@ -42,7 +43,7 @@ def show_docked_poses(protein_path, protein_name, ligands_directory, width = 800
         confidence_scores = np.array(data['position_confidence']).flatten() # list of floats
 
     # Load all ligand files from the directory and match with confidence scores
-    ligand_files = [f for f in os.listdir(diffdock_output_dir) if f.endswith('.sdf')]
+    ligand_files = [f for f in os.listdir(ligands_directory) if f.endswith('.sdf')]
     ligand_files.sort(key=lambda x: (int(x.split('_')[1]), int(x.split('_')[3].split('.')[0])))
 
     for index, file in enumerate(ligand_files):
